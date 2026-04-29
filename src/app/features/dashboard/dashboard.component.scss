@@ -1,0 +1,202 @@
+.page-container {
+  padding: 32px;
+  max-width: 1100px;
+
+  @media (max-width: 600px) {
+    padding: 20px 16px;
+  }
+}
+
+// ── Welcome ────────────────────────────────────────────────────
+.welcome-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.welcome-text {
+  .welcome-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+
+    @media (max-width: 600px) { font-size: 24px; }
+  }
+
+  .welcome-date {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+  }
+}
+
+.user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &.superuser { background: #f3e8ff; color: #7e22ce; }
+  &.admin     { background: #dbeafe; color: #1d4ed8; }
+  &.user      { background: #f1f5f9; color: #475569; }
+}
+
+// ── Stats row ──────────────────────────────────────────────────
+.stats-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 140px;
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-card);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  &.blue   { background: #dbeafe; mat-icon { color: #2563eb; } }
+  &.purple { background: #ede9fe; mat-icon { color: #7c3aed; } }
+  &.green  { background: #dcfce7; mat-icon { color: #16a34a; } }
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+}
+
+// ── Section ────────────────────────────────────────────────────
+.section-header {
+  margin-bottom: 16px;
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+// ── Quick cards ────────────────────────────────────────────────
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.quick-card {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease, background 0.25s ease;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    border-color: var(--border);
+  }
+
+  .card-body {
+    flex: 1;
+    min-width: 0;
+
+    h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+  }
+
+  .card-arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.card-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &.indigo { background: #e0e7ff; mat-icon { color: #4338ca; } }
+  &.blue   { background: #dbeafe; mat-icon { color: #2563eb; } }
+  &.green  { background: #dcfce7; mat-icon { color: #16a34a; } }
+}

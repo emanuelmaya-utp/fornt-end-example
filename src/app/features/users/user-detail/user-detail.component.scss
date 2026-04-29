@@ -1,0 +1,48 @@
+.detail-card {
+  border-radius: 12px !important;
+  max-width: 800px;
+
+  mat-card-content {
+    padding: 24px !important;
+  }
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .user-headline {
+    h2 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .user-email {
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,137 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <!-- Logo -->
+    <div class="sidenav-logo">
+      <div class="logo-img-wrap">
+        <img src="https://foronacionalambiental.org.co/wp-content/uploads/2023/05/Logo_U.T.P.png" alt="UTP" class="sidebar-logo" />
+      </div>
+      <span class="logo-text">UTP Admin</span>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="nav-section">
+      <p class="nav-label">{{ 'nav.menu' | t: lang() }}</p>
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeOnMobile(sidenav)"
+        class="nav-item"
+      >
+        <span class="nav-icon-box">
+          <mat-icon>dashboard</mat-icon>
+        </span>
+        <span class="nav-text">{{ 'nav.dashboard' | t: lang() }}</span>
+      </a>
+
+      <a
+        *appHasPermission="'users:read'"
+        routerLink="/users"
+        routerLinkActive="active-link"
+        (click)="closeOnMobile(sidenav)"
+        class="nav-item"
+      >
+        <span class="nav-icon-box">
+          <mat-icon>people</mat-icon>
+        </span>
+        <span class="nav-text">{{ 'nav.users' | t: lang() }}</span>
+      </a>
+
+      <a
+        routerLink="/profile"
+        routerLinkActive="active-link"
+        (click)="closeOnMobile(sidenav)"
+        class="nav-item"
+      >
+        <span class="nav-icon-box">
+          <mat-icon>person</mat-icon>
+        </span>
+        <span class="nav-text">{{ 'nav.profile' | t: lang() }}</span>
+      </a>
+    </nav>
+
+    <!-- User footer -->
+    <div class="sidenav-footer">
+      <div class="footer-divider"></div>
+
+      @if (authService.currentUser$ | async; as user) {
+        <div class="user-card">
+          <div class="user-avatar">{{ user.name.charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <span class="user-name">{{ user.name }}</span>
+            <span class="user-role-badge {{ user.role }}">{{ user.role }}</span>
+          </div>
+        </div>
+      }
+
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>{{ 'nav.logout' | t: lang() }}</span>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content class="sidenav-content">
+
+    <header class="topbar">
+      @if (isHandset$ | async) {
+        <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle menu" class="menu-btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+      <span class="topbar-title">UTP Admin</span>
+      <span class="flex-spacer"></span>
+
+      <!-- Action chips -->
+      <div class="topbar-chips">
+        <!-- Language toggle -->
+        <button
+          class="topbar-chip"
+          (click)="i18n.toggle()"
+          [matTooltip]="lang() === 'es' ? 'Switch to English' : 'Cambiar a Español'"
+          matTooltipPosition="below"
+          type="button"
+        >
+          <span class="flag">{{ lang() === 'es' ? '🇪🇸' : '🇺🇸' }}</span>
+          <span class="chip-label">{{ lang() === 'es' ? 'ES' : 'EN' }}</span>
+        </button>
+
+        <div class="chip-divider"></div>
+
+        <!-- Dark mode toggle -->
+        <button
+          class="topbar-chip"
+          (click)="themeService.toggle()"
+          [matTooltip]="(themeService.isDark() ? 'common.lightMode' : 'common.darkMode') | t: lang()"
+          matTooltipPosition="below"
+          type="button"
+        >
+          <mat-icon class="chip-icon">{{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+      </div>
+
+      @if (authService.currentUser$ | async; as user) {
+        <div class="topbar-divider"></div>
+        <div class="topbar-user">
+          <div class="topbar-avatar">{{ user.name.charAt(0).toUpperCase() }}</div>
+          <span class="topbar-name">{{ user.name }}</span>
+        </div>
+      }
+    </header>
+
+    <main class="main-content">
+      <router-outlet />
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

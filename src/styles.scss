@@ -1,0 +1,251 @@
+// Material Icons — fuente local (sin dependencia CDN, sin FOUC)
+@import 'material-icons/iconfont/material-icons.css';
+
+// ── CSS Custom Properties ──────────────────────────────────────
+:root {
+  --bg-page:         #f1f5f9;
+  --bg-surface:      #ffffff;
+  --bg-surface-alt:  #f8fafc;
+  --bg-surface-hover:#f8fafc;
+  --text-primary:    #0f172a;
+  --text-body:       #374151;
+  --text-secondary:  #64748b;
+  --text-muted:      #94a3b8;
+  --border:          #e2e8f0;
+  --border-card:     #f1f5f9;
+  --shadow-card:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+}
+
+html.dark {
+  --bg-page:         #0f172a;
+  --bg-surface:      #1e293b;
+  --bg-surface-alt:  #1a2535;
+  --bg-surface-hover:#273649;
+  --text-primary:    #e2e8f0;
+  --text-body:       #cbd5e1;
+  --text-secondary:  #94a3b8;
+  --text-muted:      #64748b;
+  --border:          rgba(255,255,255,0.10);
+  --border-card:     rgba(255,255,255,0.06);
+  --shadow-card:     0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+
+  // ── Angular Material M3 overrides ─────────────────────────────
+  // Card
+  --mdc-elevated-card-container-color: #1e293b;
+  --mdc-outlined-card-container-color: #1e293b;
+
+  // Table
+  --mat-table-background-color: #1e293b;
+  --mat-table-header-headline-color: #94a3b8;
+  --mat-table-row-item-label-text-color: #cbd5e1;
+
+  // Form fields
+  --mdc-outlined-text-field-input-text-color: #e2e8f0;
+  --mdc-outlined-text-field-label-text-color: #94a3b8;
+  --mdc-outlined-text-field-outline-color: rgba(255,255,255,0.18);
+  --mdc-outlined-text-field-hover-outline-color: rgba(255,255,255,0.30);
+  --mdc-outlined-text-field-focus-outline-color: #60a5fa;
+  --mdc-outlined-text-field-input-text-placeholder-color: #475569;
+  --mdc-outlined-text-field-disabled-input-text-color: #475569;
+  --mat-form-field-focus-select-arrow-color: #60a5fa;
+
+  // Select
+  --mat-select-trigger-text-color: #e2e8f0;
+  --mat-option-label-text-color: #e2e8f0;
+  --mat-select-panel-background-color: #1e293b;
+  --mat-option-selected-state-label-text-color: #60a5fa;
+  --mat-option-hover-state-layer-color: rgba(255,255,255,0.06);
+
+  // Paginator
+  --mat-paginator-container-background-color: #1e293b;
+  --mat-paginator-container-text-color: #94a3b8;
+
+  // Dialog
+  --mdc-dialog-container-color: #1e293b;
+  --mat-dialog-content-padding: 20px 24px;
+
+  // Divider
+  --mat-divider-color: rgba(255,255,255,0.08);
+
+  // Spinner
+  --mdc-circular-progress-active-indicator-color: #60a5fa;
+
+  // Tooltip
+  --mdc-plain-tooltip-container-color: #334155;
+  --mdc-plain-tooltip-supporting-text-color: #e2e8f0;
+
+  // Sidenav content
+  --mat-sidenav-content-background-color: #0f172a;
+
+  // Scrollbar
+  color-scheme: dark;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  background: var(--bg-page);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+html.dark ::-webkit-scrollbar-thumb { background: #334155; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+// ── Utilities ──────────────────────────────────────────────────
+.full-width  { width: 100%; }
+.flex-spacer { flex: 1 1 auto; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-3 { margin-bottom: 24px; }
+
+// ── Page layout ────────────────────────────────────────────────
+.page-container {
+  padding: 32px;
+
+  @media (max-width: 600px) { padding: 20px 16px; }
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+    letter-spacing: -0.3px;
+  }
+
+  .page-subtitle {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+}
+
+// ── Cards ──────────────────────────────────────────────────────
+.mat-mdc-card {
+  border-radius: 14px !important;
+  border: 1px solid var(--border-card) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+// ── Table ──────────────────────────────────────────────────────
+.mat-mdc-table {
+  width: 100%;
+}
+
+// ── Snackbars ──────────────────────────────────────────────────
+.snack-success {
+  --mdc-snackbar-container-color: #16a34a;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+.snack-error {
+  --mdc-snackbar-container-color: #dc2626;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+// ── Role chips (shared) ────────────────────────────────────────
+.role-chip,
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.superuser { background: #f3e8ff; color: #7e22ce; }
+  &.admin     { background: #dbeafe; color: #1d4ed8; }
+  &.user      { background: #f1f5f9; color: #475569; }
+}
+
+html.dark {
+  .role-chip, .status-chip {
+    &.superuser { background: rgba(168,85,247,0.18); color: #c084fc; }
+    &.admin     { background: rgba(59,130,246,0.18);  color: #93c5fd; }
+    &.user      { background: rgba(100,116,139,0.18); color: #94a3b8; }
+  }
+}
+
+// ── Loading center ─────────────────────────────────────────────
+.loading-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 24px;
+}
+
+// ── Detail grid (shared) ───────────────────────────────────────
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.detail-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+// ── Form actions ───────────────────────────────────────────────
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+// ── Buttons ────────────────────────────────────────────────────
+.btn-primary {
+  height: 40px;
+  border-radius: 8px !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// ── Form row ───────────────────────────────────────────────────
+.form-row {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  > * { flex: 1; }
+}

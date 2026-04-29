@@ -1,0 +1,90 @@
+@if (authService.currentUser$ | async; as user) {
+<div class="page-container">
+
+  <!-- Welcome header -->
+  <div class="welcome-header">
+    <div class="welcome-text">
+      <h1 class="welcome-title">{{ 'dash.greeting' | t: lang() }}, {{ user.name.split(' ')[0] }} 👋</h1>
+      <p class="welcome-date">{{ today | date: dateFormat }}</p>
+    </div>
+    <div class="user-badge {{ user.role }}">
+      <mat-icon>{{ user.role === 'superuser' ? 'stars' : user.role === 'admin' ? 'settings' : 'person' }}</mat-icon>
+      {{ user.role | titlecase }}
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon blue">
+        <mat-icon>security</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-label">{{ 'dash.system' | t: lang() }}</span>
+        <span class="stat-value">{{ 'dash.active' | t: lang() }}</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon purple">
+        <mat-icon>lock</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-label">{{ 'dash.session' | t: lang() }}</span>
+        <span class="stat-value">JWT</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-label">{{ 'dash.status' | t: lang() }}</span>
+        <span class="stat-value">{{ 'dash.verified' | t: lang() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick actions -->
+  <div class="section-header">
+    <h2 class="section-title">{{ 'dash.quickAccess' | t: lang() }}</h2>
+  </div>
+
+  <div class="cards-grid">
+
+    <div class="quick-card" routerLink="/profile">
+      <div class="card-icon-wrap indigo">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="card-body">
+        <h3>{{ 'dash.myProfile' | t: lang() }}</h3>
+        <p>{{ 'dash.myProfileDesc' | t: lang() }}</p>
+      </div>
+      <mat-icon class="card-arrow">chevron_right</mat-icon>
+    </div>
+
+    <div class="quick-card" *appHasPermission="'users:read'" routerLink="/users">
+      <div class="card-icon-wrap blue">
+        <mat-icon>people</mat-icon>
+      </div>
+      <div class="card-body">
+        <h3>{{ 'dash.users' | t: lang() }}</h3>
+        <p>{{ 'dash.usersDesc' | t: lang() }}</p>
+      </div>
+      <mat-icon class="card-arrow">chevron_right</mat-icon>
+    </div>
+
+    <div class="quick-card" *appHasPermission="'users:create'" routerLink="/users/new">
+      <div class="card-icon-wrap green">
+        <mat-icon>person_add</mat-icon>
+      </div>
+      <div class="card-body">
+        <h3>{{ 'dash.createUser' | t: lang() }}</h3>
+        <p>{{ 'dash.createUserDesc' | t: lang() }}</p>
+      </div>
+      <mat-icon class="card-arrow">chevron_right</mat-icon>
+    </div>
+
+  </div>
+
+</div>
+}

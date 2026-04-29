@@ -1,0 +1,19 @@
+.form-card {
+  border-radius: 12px !important;
+  max-width: 800px;
+
+  mat-card-content {
+    padding: 24px !important;
+  }
+}
+
+.save-btn {
+  min-width: 140px;
+  height: 44px;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .btn-spinner { flex-shrink: 0; }
+}

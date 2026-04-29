@@ -1,0 +1,348 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+// ── Sidebar ────────────────────────────────────────────────────
+.sidenav {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  border-right: none !important;
+  overflow: hidden;
+}
+
+.sidenav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 16px;
+
+  .logo-img-wrap {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  .sidebar-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .logo-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.2px;
+  }
+}
+
+// ── Nav ────────────────────────────────────────────────────────
+.nav-section {
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 8px 8px 10px;
+  display: block;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  cursor: pointer;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #e2e8f0;
+
+    .nav-icon-box mat-icon { color: #e2e8f0; }
+  }
+
+  &.active-link {
+    background: rgba(59, 130, 246, 0.18);
+    color: #93c5fd;
+
+    .nav-icon-box mat-icon { color: #60a5fa; }
+    .nav-text { font-weight: 600; }
+  }
+}
+
+.nav-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #64748b;
+    transition: color 0.15s ease;
+    line-height: 1;
+  }
+}
+
+.nav-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+// ── Footer ─────────────────────────────────────────────────────
+.sidenav-footer {
+  padding: 8px 12px 16px;
+}
+
+.footer-divider {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  margin-bottom: 12px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+
+  &.superuser { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+  &.admin     { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+  &.user      { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+
+    mat-icon { color: #f87171; }
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #64748b;
+    transition: color 0.15s ease;
+  }
+}
+
+// ── Topbar ─────────────────────────────────────────────────────
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 0 24px;
+  height: 64px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.25s ease, border-color 0.25s ease;
+
+  .menu-btn {
+    color: var(--text-secondary);
+    margin-left: -8px;
+  }
+
+  .topbar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+  }
+}
+
+// ── Topbar chips (lang + dark toggle) ─────────────────────────
+.topbar-chips {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 1px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.topbar-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+  }
+
+  .flag {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .chip-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    color: inherit;
+  }
+
+  .chip-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+  }
+}
+
+.chip-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.topbar-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+// ── Content ────────────────────────────────────────────────────
+.sidenav-content {
+  background: var(--bg-page);
+  transition: background 0.25s ease;
+}
+
+.main-content {
+  min-height: calc(100vh - 64px);
+}

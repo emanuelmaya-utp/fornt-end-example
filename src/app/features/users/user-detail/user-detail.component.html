@@ -1,0 +1,78 @@
+<div class="page-container">
+
+  <div *ngIf="loading()" class="loading-center">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading() && user() as u">
+
+    <div class="page-header">
+      <button mat-icon-button routerLink="/users" aria-label="Back to users">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <h1 class="page-title">{{ 'detail.title' | t: lang() }}</h1>
+        <p class="page-subtitle">{{ 'detail.viewing' | t: lang() }} {{ u.name }}</p>
+      </div>
+      <span class="flex-spacer"></span>
+      @if (canEditUser(u)) {
+        <button
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/users', u.id, 'edit']"
+        >
+          <mat-icon>edit</mat-icon>
+          {{ 'detail.edit' | t: lang() }}
+        </button>
+      }
+    </div>
+
+    <mat-card class="detail-card">
+      <mat-card-content>
+
+        <div class="user-header">
+          <div class="avatar-large">{{ u.name.charAt(0).toUpperCase() }}</div>
+          <div class="user-headline">
+            <h2>{{ u.name }}</h2>
+            <p class="user-email">{{ u.email }}</p>
+            <span class="status-chip {{ u.role?.name }}">
+              {{ ('role.' + u.role?.name) | t: lang() }}
+            </span>
+          </div>
+        </div>
+
+        <mat-divider class="mt-3 mb-3"></mat-divider>
+
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.id' | t: lang() }}</span>
+            <span class="detail-value">#{{ u.id }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.name' | t: lang() }}</span>
+            <span class="detail-value">{{ u.name }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.email' | t: lang() }}</span>
+            <span class="detail-value">{{ u.email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.role' | t: lang() }}</span>
+            <span class="detail-value">{{ ('role.' + u.role?.name) | t: lang() }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.since' | t: lang() }}</span>
+            <span class="detail-value">{{ u.createdAt | date: 'longDate' }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ 'detail.updated' | t: lang() }}</span>
+            <span class="detail-value">{{ u.updatedAt | date: 'longDate' }}</span>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </ng-container>
+
+</div>

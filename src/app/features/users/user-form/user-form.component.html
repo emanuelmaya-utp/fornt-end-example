@@ -1,0 +1,111 @@
+<div class="page-container">
+
+  <div *ngIf="loading()" class="loading-center">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading()">
+
+    <div class="page-header">
+      <button mat-icon-button (click)="cancel()" aria-label="Go back">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <h1 class="page-title">{{ (isEditMode ? 'form.editTitle' : 'form.createTitle') | t: lang() }}</h1>
+        <p class="page-subtitle">{{ (isEditMode ? 'form.editSubtitle' : 'form.createSubtitle') | t: lang() }}</p>
+      </div>
+    </div>
+
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'form.name' | t: lang() }}</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                placeholder="John Doe"
+                autocomplete="name"
+              />
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error>{{ getFieldError('name') }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'form.email' | t: lang() }}</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                placeholder="john@example.com"
+                autocomplete="email"
+              />
+              <mat-icon matPrefix>email</mat-icon>
+              <mat-error>{{ getFieldError('email') }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ (isEditMode ? 'form.passwordEdit' : 'form.password') | t: lang() }}
+              </mat-label>
+              <input
+                matInput
+                [type]="hidePassword() ? 'password' : 'text'"
+                formControlName="password"
+                autocomplete="new-password"
+              />
+              <mat-icon matPrefix>lock</mat-icon>
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword.set(!hidePassword())"
+                [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+              >
+                <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-hint *ngIf="isEditMode">{{ 'form.passwordHint' | t: lang() }}</mat-hint>
+              <mat-error>{{ getFieldError('password') }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field
+              *ngIf="tokenService.hasPermission('admins:create')"
+              appearance="outline"
+            >
+              <mat-label>{{ 'form.role' | t: lang() }}</mat-label>
+              <mat-select formControlName="roleName">
+                <mat-option *ngFor="let role of availableRoles" [value]="role.value">
+                  {{ ('role.' + role.value) | t: lang() }}
+                </mat-option>
+              </mat-select>
+              <mat-icon matPrefix>shield</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-actions">
+            <button mat-stroked-button type="button" (click)="cancel()" [disabled]="saving()">
+              {{ 'form.cancel' | t: lang() }}
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              [disabled]="saving()"
+              class="save-btn"
+            >
+              <mat-spinner *ngIf="saving()" diameter="18" class="btn-spinner"></mat-spinner>
+              <mat-icon *ngIf="!saving()">{{ isEditMode ? 'save' : 'person_add' }}</mat-icon>
+              {{ (isEditMode ? 'form.save' : 'form.create') | t: lang() }}
+            </button>
+          </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+  </ng-container>
+</div>

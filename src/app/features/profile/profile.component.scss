@@ -1,0 +1,69 @@
+.profile-card,
+.form-card,
+.info-card {
+  border-radius: 12px !important;
+  max-width: 800px;
+}
+
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-xl {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .profile-info {
+    flex: 1;
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .profile-email {
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+  }
+
+  .edit-btn {
+    margin-left: auto;
+    height: 44px;
+    border-radius: 8px !important;
+
+    @media (max-width: 600px) {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}
+
+.save-btn {
+  min-width: 140px;
+  height: 44px;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -1,0 +1,134 @@
+<div class="page-container">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">{{ 'users.title' | t: lang() }}</h1>
+      <p class="page-subtitle">{{ 'users.subtitle' | t: lang() }}</p>
+    </div>
+    <button
+      *appHasPermission="'users:create'"
+      mat-flat-button
+      routerLink="/users/new"
+      class="create-btn"
+    >
+      <mat-icon>person_add</mat-icon>
+      {{ 'users.new' | t: lang() }}
+    </button>
+  </div>
+
+  <div class="table-card">
+
+    <!-- Loading -->
+    @if (loading()) {
+      <div class="state-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    }
+
+    <!-- Empty state -->
+    @if (!loading() && users().length === 0) {
+      <div class="state-container">
+        <div class="empty-icon">
+          <mat-icon>group_off</mat-icon>
+        </div>
+        <h3>{{ 'users.empty.title' | t: lang() }}</h3>
+        <p>{{ 'users.empty.desc' | t: lang() }}</p>
+        <button *appHasPermission="'users:create'" mat-flat-button routerLink="/users/new" class="create-btn">
+          {{ 'users.new' | t: lang() }}
+        </button>
+      </div>
+    }
+
+    <!-- Table -->
+    @if (!loading() && users().length > 0) {
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="users()">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>{{ 'users.col.user' | t: lang() }}</th>
+            <td mat-cell *matCellDef="let user">
+              <div class="user-cell">
+                <div class="avatar" [style.background]="getAvatarColor(user.name)">
+                  {{ user.name.charAt(0).toUpperCase() }}
+                </div>
+                <div class="user-meta">
+                  <span class="user-name">{{ user.name }}</span>
+                  <span class="user-email">{{ user.email }}</span>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>{{ 'users.col.email' | t: lang() }}</th>
+            <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef>{{ 'users.col.role' | t: lang() }}</th>
+            <td mat-cell *matCellDef="let user">
+              <span class="role-chip {{ user.role?.name }}">
+                {{ ('role.' + user.role?.name) | t: lang() }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef>{{ 'users.col.registered' | t: lang() }}</th>
+            <td mat-cell *matCellDef="let user" class="date-cell">
+              {{ user.createdAt | date: 'dd MMM yyyy' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let user" class="actions-cell">
+              <button
+                mat-icon-button
+                [routerLink]="['/users', user.id]"
+                [matTooltip]="'users.tip.view' | t: lang()"
+                class="action-btn view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              @if (canEditUser(user)) {
+                <button
+                  mat-icon-button
+                  [routerLink]="['/users', user.id, 'edit']"
+                  [matTooltip]="'users.tip.edit' | t: lang()"
+                  class="action-btn edit"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              }
+              @if (canDeleteUser(user)) {
+                <button
+                  mat-icon-button
+                  (click)="confirmDelete(user)"
+                  [matTooltip]="'users.tip.delete' | t: lang()"
+                  class="action-btn delete"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        </table>
+
+        <mat-paginator
+          [length]="totalUsers()"
+          [pageSize]="pageSize()"
+          [pageIndex]="currentPage()"
+          [pageSizeOptions]="[5, 10, 25]"
+          (page)="onPageChange($event)"
+          showFirstLastButtons
+          aria-label="Users page"
+        ></mat-paginator>
+      </div>
+    }
+
+  </div>
+</div>
