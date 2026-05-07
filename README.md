@@ -58,6 +58,29 @@ Abre `http://localhost:4200` en el navegador.
 
 ---
 
+## Compilar para producción
+
+### 1. Configurar la URL del backend
+
+Edita `src/environments/environment.prod.ts`:
+
+```typescript
+export const environment = {
+  production: true,
+  apiUrl: 'https://tu-api.tudominio.com/api'
+};
+```
+
+### 2. Compilar
+
+```bash
+ng build --configuration=production
+```
+
+El output queda en `dist/front-end-example/browser/` — esa carpeta es la que se sube al hosting.
+
+---
+
 ## Estructura del proyecto
 
 ```
